@@ -9,6 +9,33 @@ namespace CaliburnMicroTest.WpfUi.ViewModels
 {
     public class AppViewModel : PropertyChangedBase
     {
+        public int _count = 50;
 
+        public int Count
+        {
+            get
+            {
+                return _count;
+            }
+            set
+            {
+                _count = value;
+                NotifyOfPropertyChange(() => Count);
+                NotifyOfPropertyChange(() => CanIncrementCount);
+            }
+        }
+
+        public void IncrementCount()
+        {
+            Count++;
+        }
+
+        public bool CanIncrementCount
+        {
+            get
+            {
+                return Count < 100;
+            }
+        }
     }
 }
