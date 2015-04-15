@@ -3,10 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d"
              Height="350" Width="525" d:DesignHeight="300" d:DesignWidth="300" Background="LightBlue">
     <Grid>
-        <RepeatButton Name="IncrementCount" Content="Up" Margin="15" VerticalAlignment="Top" />
+        <WrapPanel>
+            <RepeatButton Content="+1" VerticalAlignment="Top">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <cal:ActionMessage MethodName="IncrementCount">
+                            <cal:Parameter Value="1" />
+                        </cal:ActionMessage>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </RepeatButton>
+            <RepeatButton Content="+2" VerticalAlignment="Top">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <cal:ActionMessage MethodName="IncrementCount">
+                            <cal:Parameter Value="2" />
+                        </cal:ActionMessage>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </RepeatButton>
+        </WrapPanel>
+        
         <TextBlock Name="Count" Margin="20" FontSize="150" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
 </UserControl>

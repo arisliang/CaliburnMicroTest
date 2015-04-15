@@ -30,6 +30,11 @@ namespace CaliburnMicroTest.WpfUi.ViewModels
             Count++;
         }
 
+        public void IncrementCount(int delta)
+        {
+            Count += delta;
+        }
+
         public bool CanIncrementCount
         {
             get
