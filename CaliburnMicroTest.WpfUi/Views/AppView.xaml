@@ -8,27 +8,12 @@
              mc:Ignorable="d"
              Height="350" Width="525" d:DesignHeight="300" d:DesignWidth="300" Background="LightBlue">
     <Grid>
-        <WrapPanel>
-            <RepeatButton Content="+1" VerticalAlignment="Top">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <cal:ActionMessage MethodName="IncrementCount">
-                            <cal:Parameter Value="1" />
-                        </cal:ActionMessage>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </RepeatButton>
-            <RepeatButton Content="+2" VerticalAlignment="Top">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Click">
-                        <cal:ActionMessage MethodName="IncrementCount">
-                            <cal:Parameter Value="2" />
-                        </cal:ActionMessage>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </RepeatButton>
-        </WrapPanel>
-        
-        <TextBlock Name="Count" Margin="20" FontSize="150" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ContentControl Name="ColorVM" Margin="10" />
+        <Rectangle Grid.Column="1" Width="100" Height="100" Fill="{Binding ColorBrush}"/>
     </Grid>
 </UserControl>

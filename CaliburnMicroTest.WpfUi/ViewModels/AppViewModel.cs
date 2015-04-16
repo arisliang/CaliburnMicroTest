@@ -1,14 +1,18 @@
 ﻿using Caliburn.Micro;
+using CaliburnMicroTest.WpfUi.Events;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace CaliburnMicroTest.WpfUi.ViewModels
 {
-    public class AppViewModel : PropertyChangedBase
+    public class AppViewModel : PropertyChangedBase, IHandle<ColorEvent>
     {
+        #region fields and properties
         public int _count = 50;
 
         public int Count
@@ -25,6 +29,43 @@ namespace CaliburnMicroTest.WpfUi.ViewModels
             }
         }
 
+        public bool CanIncrementCount
+        {
+            get
+            {
+                return Count < 100;
+            }
+        }
+
+        public ColorViewModel ColorVM { get; private set; }
+
+        private SolidColorBrush _ColorBrush = null;
+        public SolidColorBrush ColorBrush
+        {
+            get
+            {
+                return _ColorBrush;
+            }
+            set
+            {
+                _ColorBrush = value;
+                NotifyOfPropertyChange(() => ColorBrush);
+            }
+        }
+
+        #endregion
+
+        #region constructor
+        [ImportingConstructor]
+        public AppViewModel(ColorViewModel cvm, IEventAggregator events)
+        {
+            ColorVM = cvm;
+            events.Subscribe(this);
+        }
+
+        #endregion
+
+        #region public methods
         public void IncrementCount()
         {
             Count++;
@@ -35,12 +76,14 @@ namespace CaliburnMicroTest.WpfUi.ViewModels
             Count += delta;
         }
 
-        public bool CanIncrementCount
+        #endregion
+
+        #region IHandle
+        public void Handle(ColorEvent message)
         {
-            get
-            {
-                return Count < 100;
-            }
+            ColorBrush = message.ColorBrush;
         }
+
+        #endregion
     }
 }
