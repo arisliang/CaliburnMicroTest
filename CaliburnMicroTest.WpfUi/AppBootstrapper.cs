@@ -36,7 +36,7 @@ namespace CaliburnMicroTest.WpfUi
         {
             _Kernel = new StandardKernel();
 
-            _Kernel.Bind<IWindowManager>().To<WindowManager>().InSingletonScope();
+            _Kernel.Bind<IWindowManager>().To<CustomWindowManager>().InSingletonScope();
             _Kernel.Bind<IEventAggregator>().To<EventAggregator>().InSingletonScope();
         }
 

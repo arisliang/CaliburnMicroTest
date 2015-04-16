@@ -11,13 +11,19 @@ namespace CaliburnMicroTest.WpfUi.ViewModels
 {
     public class ColorViewModel : PropertyChangedBase
     {
+        #region dependencies
         private readonly IEventAggregator _events = null;
 
+        #endregion
+
+        #region constructor
         [ImportingConstructor]
         public ColorViewModel(IEventAggregator events)
         {
             _events = events;
         }
+
+        #endregion
 
         #region public methods
         public void Red()

@@ -11,9 +11,11 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ContentControl Name="ColorVM" Margin="10" />
+        <ContentControl Grid.Column="0" Name="ColorVM" Margin="10" />
         <Rectangle Grid.Column="1" Width="100" Height="100" Fill="{Binding ColorBrush}"/>
+        <Button Grid.Column="2" Name="OpenWindow" Content="Open Window"></Button>
     </Grid>
 </UserControl>

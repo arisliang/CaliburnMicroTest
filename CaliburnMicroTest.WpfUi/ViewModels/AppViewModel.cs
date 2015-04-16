@@ -3,9 +3,11 @@ using CaliburnMicroTest.WpfUi.Events;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace CaliburnMicroTest.WpfUi.ViewModels
@@ -55,12 +57,18 @@ namespace CaliburnMicroTest.WpfUi.ViewModels
 
         #endregion
 
+        #region dependencies
+        private readonly IWindowManager _windowManager = null;
+
+        #endregion
+
         #region constructor
         [ImportingConstructor]
-        public AppViewModel(ColorViewModel cvm, IEventAggregator events)
+        public AppViewModel(ColorViewModel cvm, IEventAggregator events, IWindowManager wm)
         {
             ColorVM = cvm;
             events.Subscribe(this);
+            _windowManager = wm;
         }
 
         #endregion
@@ -74,6 +82,15 @@ namespace CaliburnMicroTest.WpfUi.ViewModels
         public void IncrementCount(int delta)
         {
             Count += delta;
+        }
+
+        public void OpenWindow()
+        {
+            dynamic settings = new ExpandoObject();
+            settings.WindowStartupLocation = WindowStartupLocation.Manual;
+
+            var vm = IoC.Get<AppViewModel>();
+            _windowManager.ShowWindow(vm, null, settings);
         }
 
         #endregion
