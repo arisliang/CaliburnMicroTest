@@ -12,7 +12,7 @@ using System.Windows.Media;
 
 namespace CaliburnMicroTest.WpfUi.ViewModels
 {
-    public class AppViewModel : PropertyChangedBase, IHandle<ColorEvent>
+    public class AppViewModel : Conductor<object>, IHandle<ColorEvent>
     {
         #region fields and properties
         public int _count = 50;
@@ -91,6 +91,24 @@ namespace CaliburnMicroTest.WpfUi.ViewModels
 
             var vm = IoC.Get<AppViewModel>();
             _windowManager.ShowWindow(vm, null, settings);
+        }
+
+        public void ShowRedScreen()
+        {
+            var window = IoC.Get<RedViewModel>();
+            ActivateItem(window);
+        }
+
+        public void ShowGreenScreen()
+        {
+            var window = IoC.Get<GreenViewModel>();
+            ActivateItem(window);
+        }
+
+        public void ShowBlueScreen()
+        {
+            var window = IoC.Get<BlueViewModel>();
+            ActivateItem(window);
         }
 
         #endregion

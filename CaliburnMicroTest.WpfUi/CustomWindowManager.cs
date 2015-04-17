@@ -12,7 +12,7 @@ namespace CaliburnMicroTest.WpfUi
         protected override System.Windows.Window EnsureWindow(object model, object view, bool isDialog)
         {
             var window = base.EnsureWindow(model, view, isDialog);
-            window.SizeToContent = System.Windows.SizeToContent.Manual;
+            window.SizeToContent = System.Windows.SizeToContent.WidthAndHeight;
 
             return window;
         }
